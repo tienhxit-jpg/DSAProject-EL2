@@ -242,11 +242,20 @@ void search_by_name(LIST l)
     string nameSearch;
     cout << "Nhap ten nhan vien can tim: ";
     getline(cin, nameSearch);
+    for(char &c : nameSearch)
+    {
+        c = tolower(c);
+    }
     Node* Q = l;
     vector<Employee> results;
     while (Q != NULL)
-    {
-        if (Q->data.Name.find(nameSearch) != string::npos)
+    {   
+        string empname = Q->data.Name;
+        for(char &c : empname)
+        {
+            c = tolower(c);
+        }
+        if (empname.find(nameSearch) != string::npos)
         {
             results.push_back(Q->data);
         }
@@ -267,21 +276,32 @@ void search_by_name(LIST l)
 };
 
 void display_lowestEmp(LIST l)
-{
+{   
+    if(l == NULL)
+    {
+        cout << "Danh sach rong!\n";
+        return;
+    }
     Node* Q = l;
     double lowestSalary = Q->data.ThucLinh;
-    Employee lowestEmp = Q->data;
     while (Q != NULL)
     {
         if (Q->data.ThucLinh < lowestSalary)
         {
             lowestSalary = Q->data.ThucLinh;
-            lowestEmp = Q->data;
         }
         Q = Q->pNext;
     }
     cout << "=== Thong tin nhan vien co luong thap nhat ==="<< endl;
-    output_employee(lowestEmp);
+    Q = l;
+    while(Q != NULL)
+    {
+        if(Q->data.ThucLinh == lowestSalary)
+        {
+            output_employee(Q->data);
+        }
+        Q = Q->pNext;
+    }
 };
 
 void swap(Employee &x, Employee &y)

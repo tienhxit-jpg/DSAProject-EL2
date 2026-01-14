@@ -5,7 +5,7 @@ nguyen.a@company.com
 123 Nguyen Hue, Ho Chi Minh
 22
 250000
-5500000
+5.5e+006
 NV002
 Tran Thi B
 15/03/1992
@@ -13,7 +13,7 @@ tran.b@company.com
 456 Le Loi, Ha Noi
 20
 280000
-5600000
+5.6e+006
 NV003
 Le Van C
 20/07/1988
@@ -21,7 +21,7 @@ le.c@company.com
 789 Tran Hung Dao, Da Nang
 23
 300000
-6900000
+6.9e+006
 NV004
 Pham Thi D
 10/11/1995
@@ -29,7 +29,7 @@ pham.d@company.com
 321 Dien Bien Phu, Ha Noi
 21
 260000
-5460000
+5.46e+006
 NV005
 Hoang Van E
 05/05/1991
@@ -37,4 +37,12 @@ hoang.e@company.com
 654 Cong Ly, Ho Chi Minh
 22
 290000
-6380000
+6.38e+006
+006
+Le Thi F
+10/12/1996
+le.f@company.com
+120 Yen Lang, Ha Noi
+21
+260000
+5.46e+006
