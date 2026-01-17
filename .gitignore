@@ -2,6 +2,7 @@
 .vscode/
 *.code-workspace
 
+Backup/
 # Build files
 build/
 dist/

@@ -1,0 +1,8 @@
+NV001
+Nguyen Van Anh
+01/01/1990
+nguyen.anh@company.com
+123 Nguyen Hue, Ho Chi Minh
+22
+250000
+5500000

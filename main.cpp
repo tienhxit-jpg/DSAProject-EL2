@@ -135,6 +135,86 @@ bool check_employee_id(LIST l, string id)
     return false;
 }
 
+int search_byID(LIST l, string x)
+{
+	int i = 1;
+	Node* Q = l;
+	while (Q != NULL&& Q->data.EmployeeID != x)
+	{
+		i++;
+		Q = Q->pNext;
+	}
+	if (Q == NULL)
+		return 0;
+	return i;
+}
+
+void del_head(LIST &l)
+{
+	if (len_list(l) == 0)
+		return;
+	Node* Q = l;
+	l = l->pNext;
+	delete Q;
+}
+void del_tail(LIST &l)
+{
+	//if (len_list(l) == 0)
+	if (l==NULL)
+		return;
+	/*if (len_list(l) == 1)
+	del_head(l);*/
+	if (l->pNext == NULL)
+	{
+		Node* Q = l;
+		l = NULL;
+		delete Q;
+	}
+	else
+	{
+		Node* Q = l;
+		while (Q->pNext->pNext != NULL)
+			Q = Q->pNext;
+		Node* P = Q->pNext;
+		Q->pNext = NULL;
+		delete P;
+	}
+}
+void del_pos(LIST &l, int pos)
+{
+	if (pos<1 || pos>len_list(l))
+		return;
+	else
+	{
+		if (pos == 1)
+			del_head(l);
+		else
+		{
+			if (pos == len_list(l))
+				del_tail(l);
+			else
+			{
+				int i = 1;
+				Node* Q = l;
+				while (i != pos - 1)
+				{
+					i++;
+					Q = Q->pNext;
+				}
+				Node* P;
+				P = Q->pNext;
+				Q->pNext = P->pNext;
+				delete P;
+			}
+		}
+	}
+}
+void del_val(LIST &l, string val)
+{
+	while (search_byID(l, val) != 0)
+		del_pos(l, search_byID(l, val));
+}
+
 void input_list(LIST& l)
 {
     int n;
@@ -352,24 +432,39 @@ void sort_by_salary(LIST& l)
 
 void delete_emp(LIST& l)
 {
+
     string id;
-    if (l == NULL)
-        return;
     cout << "Nhap ma nhan vien can xoa: ";
     getline(cin, id);
-    while (l != NULL && l->data.EmployeeID == id)
+
+    int pos = search_byID(l, id);
+    
+    if (pos == 0)
     {
-        Node* temp = l;
-        l = l->pNext;
-            fstream file;
-        LIST tempList;
-        create_list(tempList);
-        add_tail(tempList, temp->data);
-        write_file("DSNV_XOA.txt", file, tempList);
-        delete temp;
-        cout << "Da xoa nhan vien co ma: " << id << endl;
+        cout << "Khong tim thay nhan vien co ma: " << id << endl;
         return;
     }
+    
+    // Lưu thông tin nhân viên trước khi xóa
+    Node* Q = l;
+    for (int i = 1; i < pos; i++)
+    {
+        Q = Q->pNext;
+    }
+    
+    fstream file;
+    LIST tempList;
+    create_list(tempList);
+    add_tail(tempList, Q->data);
+    write_file("DSNV_XOA.txt", file, tempList);
+    
+    // Xóa nhân viên tại vị trí
+    del_pos(l, pos);
+    
+    cout << "Da xoa nhan vien co ma: " << id << endl;
+    
+    // Cập nhật file chính
+    write_file("DSNV.txt", file, l);
 };
 
 void add_emp(LIST& l)
@@ -397,6 +492,7 @@ void add_emp(LIST& l)
     cin >> emp.SoNgayCong;
     cout << "Nhap luong ngay: ";
     cin >> emp.LuongNgay;
+    emp.ThucLinh = emp.SoNgayCong * emp.LuongNgay;
     cin.ignore();
     add_tail(l, emp);
     fstream file;
@@ -419,7 +515,7 @@ void update_emp(LIST& l)
     {
         if (Q->data.EmployeeID == id)
         {
-            cout << "\nNhap thong tin nhan vien can sua:\n";
+            cout << "Nhap thong tin nhan vien can sua:" << endl;
             cout << "Nhap Ten NV: ";
             getline(cin, Q->data.Name);
             cout << "Nhap Ngay sinh: ";
@@ -484,6 +580,7 @@ int main()
             write_file("DSNV.txt", file, employeeList);
             break;
         case 2:
+            cout << "=== Danh sach nhan vien tu file ===\n";
             output_list(employeeList);
             break;
         case 3:
