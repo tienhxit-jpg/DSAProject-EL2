@@ -287,22 +287,32 @@ Thuc linh: 5.500.000 VND
 
 ## 📊 Độ Phức Tạp Thuật Toán
 
-| Hàm | Thời Gian | Không Gian | Ghi Chú |
-|-----|-----------|-----------|---------|
-| `create_list()` | O(1) | O(1) | Khởi tạo danh sách rỗng |
-| `add_head()` | O(1) | O(1) | Thêm vào đầu danh sách |
-| `add_tail()` | O(n) | O(1) | Phải duyệt để tìm cuối |
-| `add_pos()` | O(n) | O(1) | Duyệt đến vị trí chỉ định |
-| `len_list()` | O(n) | O(1) | Duyệt toàn bộ danh sách |
-| `del_head()` | O(1) | O(1) | Xóa node đầu tiên |
-| `del_tail()` | O(n) | O(1) | Phải duyệt để tìm cuối |
-| `del_pos()` | O(n) | O(1) | Duyệt đến vị trí chỉ định |
-| `search_by_id()` | O(n) | O(1) | Tìm kiếm tuyến tính |
-| `search_by_name()` | O(n) | O(k) | k = số kết quả tìm được |
-| `sort_by_salary()` | O(n²) | O(1) | Bubble Sort |
-| `output_list()` | O(n) | O(1) | Duyệt và hiển thị |
-| `read_file()` | O(n) | O(n) | Đọc n nhân viên |
-| `write_file()` | O(n) | O(1) | Ghi n nhân viên |
+| Hàm | Thời Gian | Không Gian | Trường Hợp Tốt | Trường Hợp Xấu | Ghi Chú |
+|-----|-----------|-----------|----------------|----------------|---------|
+| `create_list()` | O(1) | O(1) | O(1) | O(1) | Khởi tạo con trỏ NULL |
+| `create_node()` | O(1) | O(1) | O(1) | O(1) | Cấp phát bộ nhớ cho 1 node |
+| `add_head()` | O(1) | O(1) | O(1) | O(1) | Thêm vào đầu danh sách |
+| `add_tail()` | O(n) | O(1) | O(n) | O(n) | Phải duyệt đến cuối |
+| `add_pos()` | O(n) | O(1) | O(1) | O(n) | Duyệt đến vị trí pos |
+| `len_list()` | O(n) | O(1) | O(n) | O(n) | Duyệt toàn bộ danh sách |
+| `del_head()` | O(1) | O(1) | O(1) | O(1) | Xóa node đầu tiên |
+| `del_tail()` | O(n) | O(1) | O(n) | O(n) | Phải duyệt đến cuối |
+| `del_pos()` | O(n) | O(1) | O(1) | O(n) | Duyệt đến vị trí pos |
+| `del_val()` | O(n²) | O(1) | O(n²) | O(n²) | Gọi delete nhiều lần |
+| `check_employee_id()` | O(n) | O(1) | O(1) | O(n) | Tìm kiếm tuyến tính |
+| `search_byID()` | O(n) | O(1) | O(1) | O(n) | Tìm vị trí của node |
+| `search_by_id()` | O(n) | O(1) | O(1) | O(n) | Gọi search_byID() |
+| `search_by_name()` | O(n) | O(k) | O(1) | O(n) | k = số kết quả tìm được |
+| `format_currency()` | O(m) | O(m) | O(m) | O(m) | m = số chữ số của số |
+| `sort_by_salary()` | O(n²) | O(1) | O(n²) | O(n²) | Bubble sort |
+| `display_lowestEmp()` | O(n) | O(1) | O(n) | O(n) | Duyệt và so sánh |
+| `input_list()` | O(n·k) | O(n) | O(n·k) | O(n·k) | n nhân viên, k thao tác I/O |
+| `output_list()` | O(n) | O(1) | O(n) | O(n) | Duyệt toàn bộ danh sách |
+| `add_emp()` | O(n) | O(1) | O(n) | O(n) | Kiểm tra trùng + thêm |
+| `delete_emp()` | O(n) | O(1) | O(1) | O(n) | Tìm + xóa |
+| `update_emp()` | O(n) | O(1) | O(1) | O(n) | Tìm + sửa |
+| `read_file()` | O(n·m) | O(n) | O(n·m) | O(n·m) | n nhân viên, m byte mỗi nhân viên |
+| `write_file()` | O(n·m) | O(1) | O(n·m) | O(n·m) | n nhân viên, m byte mỗi nhân viên |
 
 **Ghi chú**: n = số lượng nhân viên trong danh sách
 
